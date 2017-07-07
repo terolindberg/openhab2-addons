@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="mopidy"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+    <!-- Sample Thing Type -->
+    <thing-type id="player">
+        <label>Mopidy Player</label>
+        <description>Mopidy player in local network</description>
+
+        <channels>
+            <channel id="currentlyPlaying" typeId="currentlyplaying"/>
+            <channel id="currentlyPlayingTrack" typeId="currentlyplayingtrack"/>
+            <channel id="currentlyPlayingAlbum" typeId="currentlyplayingalbum"/>
+            <channel id="currentlyPlayingArtist" typeId="currentlyplayingartist"/>
+            
+            <channel id="currentlyPlayingAlbumArtSmall" typeId="currentlyplayingalbumartsmall"/>
+            <channel id="currentlyPlayingAlbumArt" typeId="currentlyplayingalbumart"/>
+            <channel id="currentlyPlayingAlbumArtLarge" typeId="currentlyplayingalbumartlarge"/>
+
+            <channel id="mixervolume" typeId="mixervolume"/>
+            <channel id="mixermute" typeId="mixermute"/>
+            <channel id="search" typeId="search"/>
+            <channel id="control" typeId="control"/>
+        </channels>
+        <config-description>
+            <parameter name="hostname" type="text" required="true">
+                <label>Hostname or IP</label>
+                <description>Hostname or IP of Mopidy</description>
+             </parameter>
+
+            <parameter name="port" type="integer" required="true">
+                <label>Port</label>
+                <description>The port on which Mopidy can be accessed</description>
+                <default>6680</default>
+            </parameter>
+
+        </config-description>
+    </thing-type>
+
+    <channel-type id="currentlyplaying">
+        <item-type>String</item-type>
+        <label>Currently playing</label>
+        <description>Currently playing track name</description>
+    </channel-type>
+    <channel-type id="currentlyplayingtrack">
+        <item-type>String</item-type>
+        <label>Currently playing track</label>
+        <description>Currently playing track name</description>
+    </channel-type>
+    <channel-type id="currentlyplayingalbum">
+        <item-type>String</item-type>
+        <label>Currently playing album</label>
+        <description>Currently playing track name</description>
+    </channel-type>    
+    <channel-type id="currentlyplayingartist">
+        <item-type>String</item-type>
+        <label>Currently playing artist</label>
+        <description>Currently playing track name</description>
+    </channel-type>
+    <channel-type id="currentlyplayingalbumartsmall">
+        <item-type>String</item-type>
+        <label>Album Art (64x64)</label>
+        <description>Tiny Album Art Url</description>
+    </channel-type>
+    <channel-type id="currentlyplayingalbumart">
+        <item-type>String</item-type>
+        <label>Album Art</label>
+        <description>Album Art Url</description>
+    </channel-type>
+    <channel-type id="currentlyplayingalbumartlarge">
+        <item-type>String</item-type>
+        <label>Large Album Art</label>
+        <description>Large Album Art Url</description>
+    </channel-type>
+    <channel-type id="control">
+        <item-type>Player</item-type>
+        <label>Control</label>
+        <description>Control the Zone Player, e.g. start/stop/next/previous/ffward/rewind</description>
+        <category>Player</category>
+    </channel-type>
+    <channel-type id="mixervolume">
+        <item-type>Dimmer</item-type>
+        <label>Volume</label>
+        <description>Mopidy internal Volume</description>
+    </channel-type>
+    <channel-type id="mixermute">
+        <item-type>Switch</item-type>
+        <label>Mute</label>
+        <description>Mopidy internal Mute</description>
+    </channel-type>
+    <channel-type id="search">
+        <item-type>String</item-type>
+        <label>Search Field</label>
+        <description>Search Field</description>
+    </channel-type>
+
+
+</thing:thing-descriptions>
