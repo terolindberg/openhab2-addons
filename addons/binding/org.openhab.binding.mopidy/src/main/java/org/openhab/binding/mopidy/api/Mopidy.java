@@ -33,6 +33,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class Mopidy {
     Gson gson = new Gson();
     private final Logger logger = LoggerFactory.getLogger(Mopidy.class);

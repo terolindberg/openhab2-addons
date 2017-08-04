@@ -1,5 +1,10 @@
 package org.openhab.binding.mopidy.api.ws;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class MopidyWSConstants {
     // public static final String STATE_PLAYING = "playing";
     // public static final String STATE_STOPPED = "stopped";

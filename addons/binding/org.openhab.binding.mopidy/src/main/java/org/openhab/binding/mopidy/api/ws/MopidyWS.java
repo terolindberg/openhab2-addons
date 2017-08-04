@@ -13,6 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 @WebSocket(maxTextMessageSize = 64 * 1024)
 public class MopidyWS {
     MopidyWSListener listener;

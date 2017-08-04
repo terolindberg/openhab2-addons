@@ -3,6 +3,11 @@ package org.openhab.binding.mopidy.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class Playlist {
     private String uri;
     private String name;

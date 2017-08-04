@@ -1,5 +1,10 @@
 package org.openhab.binding.mopidy.api.model;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class Artist {
     // "__model__":"Artist",
     String name;// "name":"Dire Straits",

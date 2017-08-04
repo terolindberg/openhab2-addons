@@ -1,5 +1,10 @@
 package org.openhab.binding.mopidy.api;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class MopidyAPIConstants {
     public final static String METHOD_CORE_URI_SCHEMES = "core.get_uri_schemes";
 

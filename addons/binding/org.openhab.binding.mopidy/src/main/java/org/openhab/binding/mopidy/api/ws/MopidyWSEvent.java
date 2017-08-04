@@ -4,6 +4,11 @@ import org.openhab.binding.mopidy.api.model.TLTrack;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class MopidyWSEvent {
     @SerializedName("tl_track")
     TLTrack tlTrack;

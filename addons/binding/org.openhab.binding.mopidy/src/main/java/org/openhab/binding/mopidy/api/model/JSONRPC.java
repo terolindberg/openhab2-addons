@@ -2,6 +2,11 @@ package org.openhab.binding.mopidy.api.model;
 
 import java.util.HashMap;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class JSONRPC {
     /*
      * curl -X POST -H Content-Type:application/json -d '{
@@ -25,7 +30,13 @@ public class JSONRPC {
     }
 }
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 class MopidyRPC {
+
     public static int apiCallID = 0;
 
     public static String getID() {
