@@ -113,6 +113,9 @@ public class AVReceiverDiscoveryParticipant implements UpnpDiscoveryParticipant 
                 return new ThingUID(THING_TYPE_ONKYO, udn);
             } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_EPSON)) {
                 return new ThingUID(THING_TYPE_EPSON_PROJECTOR, udn);
+            } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_PHILIPS)) {
+                return new ThingUID(THING_TYPE_PHILIPS, udn);
+
             } else {
 
                 return new ThingUID(THING_TYPE_GENERAL_RENDERER, udn);
