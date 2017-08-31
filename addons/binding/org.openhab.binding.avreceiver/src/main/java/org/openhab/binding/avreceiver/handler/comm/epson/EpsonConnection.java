@@ -1,12 +1,14 @@
 package org.openhab.binding.avreceiver.handler.comm.epson;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 
 import org.openhab.binding.avreceiver.handler.comm.AVSocketConnection;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class EpsonConnection extends AVSocketConnection {
 
     public EpsonConnection(String host, int port) {
@@ -52,20 +54,20 @@ public class EpsonConnection extends AVSocketConnection {
         }
     }
 
-    public void datagram() throws Exception {
-        DatagramSocket clientSocket = new DatagramSocket();
-        InetAddress IPAddress = InetAddress.getByName(host);
-        byte[] sendData = new byte[135];
-        byte[] receiveData = new byte[135];
-        sendData = "PWON\r".getBytes();
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-        clientSocket.send(sendPacket);
-        System.out.println("data sent " + new String(sendData));
-        DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-        clientSocket.receive(receivePacket);
-        String modifiedSentence = new String(receivePacket.getData());
-        System.out.println("FROM SERVER:" + modifiedSentence);
-        clientSocket.close();
-    }
+    // public void datagram() throws Exception {
+    // DatagramSocket clientSocket = new DatagramSocket();
+    // InetAddress IPAddress = InetAddress.getByName(host);
+    // byte[] sendData = new byte[135];
+    // byte[] receiveData = new byte[135];
+    // sendData = "PWON\r".getBytes();
+    // DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+    // clientSocket.send(sendPacket);
+    // System.out.println("data sent " + new String(sendData));
+    // DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+    // clientSocket.receive(receivePacket);
+    // String modifiedSentence = new String(receivePacket.getData());
+    // System.out.println("FROM SERVER:" + modifiedSentence);
+    // clientSocket.close();
+    // }
 
 }

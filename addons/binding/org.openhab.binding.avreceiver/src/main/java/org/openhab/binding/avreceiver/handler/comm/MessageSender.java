@@ -8,6 +8,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Queue implementation to send the messages in received order
+ * Does not manage any messages or wait for acknowledgement of sent
+ * message.
+ *
+ * Message sending properties are managed by parameters and functionality
+ * in {@link Message}
+ *
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class MessageSender implements Runnable {
 
     private Logger logger = LoggerFactory.getLogger(MessageSender.class);
@@ -79,7 +91,7 @@ public class MessageSender implements Runnable {
 
     public void send(Message msg) {
         synchronized (queue) {
-            logger.trace("Adding to queue size: " + queue.size());
+            logger.trace("Adding to queue size: {}", queue.size());
             queue.add(msg);
             queue.notify();
         }

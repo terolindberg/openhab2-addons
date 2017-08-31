@@ -6,6 +6,11 @@ import java.util.Base64;
 
 import org.openhab.binding.avreceiver.handler.comm.Message;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class SamsungMessage extends Message {
     static final String tv = "iphone.LE32C650.iapp.samsung";
 

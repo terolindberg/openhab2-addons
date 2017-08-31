@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class SocketReader implements Runnable {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

@@ -114,6 +114,13 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
 
     }
 
+    /**
+     * Invoked by {@link AVSocketConnection} once it has received a message from socket
+     *
+     * Tries to match beginning of the message with a channel of the thing and change the
+     * channel value accordingly. Can be overridden by the implementing class to handle
+     * more complex protocols and cases which don't fit the xml specification easily
+     */
     @Override
     public void handleMessage(String message) {
         List<Channel> channels = getThing().getChannels();

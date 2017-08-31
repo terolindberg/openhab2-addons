@@ -16,6 +16,11 @@ import org.openhab.binding.avreceiver.handler.AVReceiverHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public abstract class AVSocketConnection implements ConnectionStateListener, MessageHandler {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -243,6 +248,13 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
 
     }
 
+    /**
+     * Implementation of {@link MessageHandler} invoked by {@link SocketReader}
+     * Cancels timeout timers. If {@link AVSocketConnection} has a {@link MessageHandler}
+     * assigned, will forward the message to it,otherwise no action is taken
+     *
+     * @param message Plain text read from the socket
+     */
     @Override
     public void handleMessage(String message) {
 

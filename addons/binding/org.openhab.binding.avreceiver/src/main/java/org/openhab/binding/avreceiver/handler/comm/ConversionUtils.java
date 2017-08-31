@@ -1,5 +1,10 @@
 package org.openhab.binding.avreceiver.handler.comm;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class ConversionUtils {
     public static double getVolumeIndB(int percentage, double mindB, double maxdb) {
 

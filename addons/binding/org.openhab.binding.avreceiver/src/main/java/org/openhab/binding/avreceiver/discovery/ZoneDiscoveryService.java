@@ -15,6 +15,11 @@ import org.eclipse.smarthome.config.discovery.DiscoveryService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class ZoneDiscoveryService extends AbstractDiscoveryService {
 
     private ServiceRegistration<?> reg = null;

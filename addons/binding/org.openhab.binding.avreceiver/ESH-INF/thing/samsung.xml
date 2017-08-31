@@ -9,8 +9,31 @@
         <label>Samsung TV / BluRay / Settop box</label>
         <description>Binding for Samsung media gadgets</description>
 
+
         <channels>
-            <channel id="channel1" typeId="sample-channel"/>
+        
+            <channel id="power" typeId="power"> 
+                <label>Power</label>
+                <properties>
+                    <property name="value">PW{}</property>
+                    <property name="ON">ON</property>
+                    <property name="OFF">STANDBY</property>
+                </properties>            
+            </channel>   
+            <channel id="volume" typeId="volume" />
+            <channel id="mute" typeId="mute" />
+            <channel id="brightness" typeId="brightness" />
+            <channel id="contrast" typeId="contrast" />
+            <channel id="sharpness" typeId="sharpness" />
+            <channel id="colorTemperature" typeId="colortemperature" />
+            <channel id="sourceName" typeId="sourcename" />
+            <channel id="sourceId" typeId="sourceid" />
+            <channel id="channel" typeId="channel" />
+            <channel id="programTitle" typeId="programtitle" />
+            <channel id="channelName" typeId="channelname" />
+            <channel id="url" typeId="url" />
+            <channel id="stopBrowser" typeId="stopbrowser" />
+            <channel id="keyCode" typeId="keycode" />
         </channels>
         
         <config-description>

@@ -3,6 +3,11 @@ package org.openhab.binding.avreceiver.handler.comm;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ *
+ * @author tero.lindberg
+ *
+ */
 public class Message {
     protected String message;
     private static int MAX_RETRIES = 5;
@@ -11,7 +16,7 @@ public class Message {
     /**
      * Delay required by device before sending next message.
      *
-     * Eg. Power on may need a few seconds to be executed by the device and
+     * Eg. 'Power on' may need a few seconds to be executed by the device and
      * we need to wait for a while before sending next command
      */
     private int postSendDelayMs = 100;

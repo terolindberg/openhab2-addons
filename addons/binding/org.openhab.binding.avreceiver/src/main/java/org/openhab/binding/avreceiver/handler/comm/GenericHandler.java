@@ -8,6 +8,12 @@ import org.openhab.binding.avreceiver.handler.AVReceiverHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * GenericHandler is a dummy implementation for a thing handler, can be used for basic functions.
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class GenericHandler extends AVReceiverHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -17,19 +23,18 @@ public class GenericHandler extends AVReceiverHandler {
 
     @Override
     protected String handleChannelCommand(ChannelUID channelUID, Command command) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
     @Override
     protected Message createMessage(ChannelUID channelUID, Command command, String commandStr) {
-        // TODO Auto-generated method stub
+
         return new Message(commandStr);
     }
 
     @Override
     public void handleRefresh(Command command, Channel channel) {
-        // TODO Auto-generated method stub
 
     }
 

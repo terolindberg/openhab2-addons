@@ -6,6 +6,11 @@ import java.net.InetAddress;
 
 import org.openhab.binding.avreceiver.handler.comm.AVSocketConnection;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class DenonConnection extends AVSocketConnection {
 
     public DenonConnection(String host, int port) {

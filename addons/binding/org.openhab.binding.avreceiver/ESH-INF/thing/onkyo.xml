@@ -74,7 +74,7 @@
 			<parameter name="socket_port" type="integer" required="true">
 				<label>Port</label>
 				<description>The port </description>
-				<default>50000</default>
+				<default>60128</default>
 			</parameter>
             <parameter name="refresh_code" type="text" required="false">
                 <label>REFRESH CODE</label>

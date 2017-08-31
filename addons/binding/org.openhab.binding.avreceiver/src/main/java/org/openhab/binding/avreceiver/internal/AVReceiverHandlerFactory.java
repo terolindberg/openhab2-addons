@@ -23,6 +23,8 @@ import org.openhab.binding.avreceiver.handler.comm.denon.DenonConnection;
 import org.openhab.binding.avreceiver.handler.comm.denon.DenonHandler;
 import org.openhab.binding.avreceiver.handler.comm.epson.EpsonConnection;
 import org.openhab.binding.avreceiver.handler.comm.epson.EpsonHandler;
+import org.openhab.binding.avreceiver.handler.comm.onkyo.OnkyoConnection;
+import org.openhab.binding.avreceiver.handler.comm.onkyo.OnkyoHandler;
 import org.openhab.binding.avreceiver.handler.comm.samsung.SamsungConnection;
 import org.openhab.binding.avreceiver.handler.comm.samsung.SamsungHandler;
 import org.openhab.binding.avreceiver.handler.comm.yamaha.YamahaConnection;
@@ -85,6 +87,8 @@ public class AVReceiverHandlerFactory extends BaseThingHandlerFactory {
             return new YamahaHandler(thing, new YamahaConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_EPSON_PROJECTOR)) {
             return new EpsonHandler(thing, new EpsonConnection(host, port));
+        } else if (thingTypeUID.equals(THING_TYPE_ONKYO)) {
+            return new OnkyoHandler(thing, new OnkyoConnection(host, port));
         } else {
             return new GenericHandler(thing, new GenericConnection(host, port));
         }

@@ -5,6 +5,11 @@ import java.io.Writer;
 
 import org.openhab.binding.avreceiver.handler.comm.Message;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class EpsonMessage extends Message {
 
     public EpsonMessage(String msg) {

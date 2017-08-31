@@ -4,16 +4,18 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Base64;
 
 import org.openhab.binding.avreceiver.handler.comm.AVSocketConnection;
-import org.openhab.binding.avreceiver.handler.comm.ConnectionStateListener;
-import org.openhab.binding.avreceiver.handler.comm.MessageHandler;
 import org.openhab.binding.avreceiver.handler.comm.SocketReader;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class SamsungConnection extends AVSocketConnection {
 
     public SamsungConnection(String host, int port) {
@@ -22,7 +24,7 @@ public class SamsungConnection extends AVSocketConnection {
 
     String src = "192.168.1.128"; // # ip of remote
     String mac = "8C-70-5A-C8-11-28"; // # mac of remote
-    String remote = "Munkapula";// # remote name
+    String remote = "OpenHAB AV";// # remote name
     String app = "iphone..iapp.samsung"; // # iphone..iapp.samsung
     String tv = "iphone.LE32C650.iapp.samsung"; // # iphone.LE32C650.iapp.samsung
     BufferedWriter bw;
@@ -31,64 +33,64 @@ public class SamsungConnection extends AVSocketConnection {
     Socket socket;
     SocketReader reader;
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        final SamsungConnection ss = new SamsungConnection("192.168.1.133", 55000);
-
-        try {
-            ss.startConnection(true);
-            ss.send("KEY_DOWN");
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            SocketReader sr = new SocketReader(new InputStreamReader(System.in), new MessageHandler() {
-
-                @Override
-                public void handleMessage(String message) {
-                    System.out.println("MESSAGE:" + message);
-                    try {
-                        ss.send("KEY_" + message);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new ConnectionStateListener() {
-
-                @Override
-                public void connectionStarted() {
-                    // TODO Auto-generated method stub
-
-                }
-
-                @Override
-                public void connectionClosed(boolean fail) {
-                    // TODO Auto-generated method stub
-
-                }
-            });
-            new Thread(sr).start();
-
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            // ss.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-
-        }
-
-    }
+    // /**
+    // * @param args
+    // */
+    // public static void main(String[] args) {
+    // final SamsungConnection ss = new SamsungConnection("192.168.1.133", 55000);
+    //
+    // try {
+    // ss.startConnection(true);
+    // ss.send("KEY_DOWN");
+    // try {
+    // Thread.sleep(1500);
+    // } catch (InterruptedException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    // SocketReader sr = new SocketReader(new InputStreamReader(System.in), new MessageHandler() {
+    //
+    // @Override
+    // public void handleMessage(String message) {
+    // System.out.println("MESSAGE:" + message);
+    // try {
+    // ss.send("KEY_" + message);
+    // } catch (IOException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    //
+    // }
+    // }, new ConnectionStateListener() {
+    //
+    // @Override
+    // public void connectionStarted() {
+    // // TODO Auto-generated method stub
+    //
+    // }
+    //
+    // @Override
+    // public void connectionClosed(boolean fail) {
+    // // TODO Auto-generated method stub
+    //
+    // }
+    // });
+    // new Thread(sr).start();
+    //
+    // try {
+    // Thread.sleep(1500);
+    // } catch (InterruptedException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    // // ss.close();
+    // } catch (IOException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    //
+    // }
+    //
+    // }
 
     void close() {
 

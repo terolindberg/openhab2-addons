@@ -11,6 +11,11 @@ import org.openhab.binding.avreceiver.handler.comm.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class DenonHandler extends AVReceiverHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 

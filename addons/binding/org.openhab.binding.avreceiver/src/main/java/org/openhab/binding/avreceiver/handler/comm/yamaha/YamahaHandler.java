@@ -12,6 +12,11 @@ import org.openhab.binding.avreceiver.handler.comm.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ * @author Tero Lindberg
+ *
+ */
 public class YamahaHandler extends AVReceiverHandler {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -23,7 +28,6 @@ public class YamahaHandler extends AVReceiverHandler {
 
     @Override
     public void handleRefresh(Command command, Channel channel) {
-        // TODO Auto-generated method stub
         Map<String, String> props = channel.getProperties();
 
         if (props.containsKey("value")) {
