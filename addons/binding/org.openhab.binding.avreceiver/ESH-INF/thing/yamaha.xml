@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="avreceiver"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+    <!-- Sample Thing Type -->
+    <thing-type id="yamaha">
+        <label>Yamaha Receiver</label>
+        <description>Binding for Yamaha AV Receivers</description>
+
+        <channels>
+            <channel id="power" typeId="power">
+                <label>Power</label>
+                <properties>
+                   <property name="value">@MAIN:PWR={}</property>
+                   <property name="ON">On</property>
+                   <property name="OFF">Standby</property>
+                </properties>
+            </channel>
+            <channel id="mute" typeId="mute">
+                <label>Mute</label>
+                <properties>
+                   <property name="value">@MAIN:MUTE={}</property>
+                   <property name="ON">On</property>
+                   <property name="OFF">Off</property>
+                </properties>
+            </channel>
+            <channel id="hdmi1out" typeId="hdmi1out">
+                <label>HDMI1 Out</label>
+                <properties>
+                   <property name="value">@SYS:HDMIOUT1={}</property>
+                   <property name="ON">On</property>
+                   <property name="OFF">Off</property>
+                </properties>
+            </channel>
+            <channel id="hdmi2out" typeId="hdmi2out">
+                <label>HDMI2 Out</label>
+                <properties>
+                   <property name="value">@SYS:HDMIOUT2={}</property>
+                   <property name="ON">On</property>
+                   <property name="OFF">Off</property>
+                </properties>
+            </channel>
+            <channel typeId="master_volume_db" id="master_volume_db">
+                <label>Master Volume</label>
+                <properties>
+                   <property name="value">@MAIN:VOL={}</property>
+                   <property name="min">-80.0</property>
+                   <property name="max">16.5</property>
+                   <property name="step">0.5</property>
+                </properties>
+            </channel>
+            <channel typeId="sound_program_yamaha" id="sound_program_yamaha">
+                <label>Sound Program</label>
+                <properties>
+                    <property name="value">@MAIN:SOUNDPRG={}</property>
+                </properties>
+                
+            </channel>
+            <channel typeId="input_yamaha" id="input_yamaha">     
+                <label>Input</label>
+                <properties>
+                    <property name="value">@MAIN:INP={}</property>
+                </properties>
+            </channel>
+            
+            <channel typeId="scene_yamaha" id="scene_yamaha">     
+                <label>Scene</label>
+                <properties>
+                    <property name="value">@MAIN:SCENE={}</property>
+                </properties>
+            </channel>
+        </channels>
+        <config-description>
+            <parameter name="hostname" type="text" required="true">
+                <label>Hostname or IP</label>
+                <description>Hostname or IP of Yamaha AV</description>
+             </parameter>
+            <parameter name="socket_port" type="integer" required="true">
+                <label>Port</label>
+                <description>The port </description>
+                <default>50000</default>
+            </parameter>
+            <parameter name="refresh_code" type="text" required="false">
+                <label>REFRESH CODE</label>
+                <default>?</default>
+            </parameter>
+
+        </config-description>
+    </thing-type>
+
+    <!-- Sample Channel Type -->
+    <channel-type id="input_yamaha">
+        <item-type>String</item-type>
+        <label>Input</label>
+        <description>Input</description>
+        <state>
+            <options>
+                <option value="SIRIUS">SIRIUS</option>
+                <option value="TUNER">TUNER</option>
+                <option value="MULTI CH">MULTI CH</option>
+                <option value="HDMI1">HDMI1</option>
+                <option value="HDMI2">HDMI2</option>
+                <option value="HDMI3">HDMI3</option>
+                <option value="HDMI4">HDMI4</option>
+                <option value="HDMI5">HDMI5</option>
+                <option value="AV1">AV1</option>
+                <option value="AV2">AV2</option>
+                <option value="AV3">AV3</option>
+                <option value="AV4">AV4</option>
+                <option value="AV5">AV5</option>
+                <option value="AV6">AV6</option>
+                <option value="V-AUX">V-AUX</option>
+                <option value="AUDIO1">AUDIO1</option>
+                <option value="AUDIO2">AUDIO2</option>
+                <option value="DOCK">DOCK</option>
+                <option value="iPod">iPod</option>
+                <option value="Bluetooth">Bluetooth</option>
+                <option value="UAW">UAW</option>
+                <option value="USB/NET">USB/NET</option>
+                <option value="PC">PC</option>
+                <option value="NET RADIO">NET RADIO</option>
+                <option value="Rhapsody">Rhapsody</option>
+                <option value="SIRIUS InternetRadio">SIRIUS InternetRadio</option>
+            </options>
+        </state>
+    </channel-type>
+    <channel-type id="sound_program_yamaha">
+        <item-type>String</item-type>
+        <label>Sound Program</label>
+        <description>Sound Program</description>
+        <state>
+            <options>
+                <option value="Music Video">Music Video</option>
+                <option value="The Roxy Theater">The Roxy Theater</option>
+                <option value="Cellar Club">Cellar Club</option>
+                <option value="Hall in Vienna">Hall in Vienna</option>
+                <option value="Hall in Munich">Hall in Munich</option>
+                <option value="Roleplaying Game">Roleplaying Game</option>
+                <option value="Action Game">Action Game</option>
+                <option value="Sports">Sports</option>
+                <option value="Mono Movie">Mono Movie</option>
+                <option value="Drama">Drama</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Spectacle">Spectacle</option>
+                <option value="Standard">Standard</option>
+                
+                <option value="Pro Logic">Pro Logic</option>
+                <option value="Neo:6 Music">Neo:6 Music</option>
+                <option value="Neo:6 Cinema">Neo:6 Cinema</option>
+                <option value="PLII[x] Game">PLII[x] Game</option>
+                <option value="PLII[x] Music">PLII[x] Music</option>
+                <option value="PLII[x] Movie">PLII[x] Movie</option>
+                <option value="7ch Enhancer">7ch Enhancer</option>
+
+                <option value="2ch Stereo">2ch Stereo</option>
+                <option value="7ch Stereo">7ch Stereo</option>
+                <option value="STRAIGHT">STRAIGHT</option>
+                <option value="Straight Enhancer">Straight Enhancer</option>
+            </options>
+        </state>
+    </channel-type>
+    <channel-type id="scene_yamaha">
+        <item-type>String</item-type>
+        <label>Scene</label>
+        <description>Recalling Main Zone Scene banks.</description>
+        <state>
+            <options>
+                <option value="Scene 1">Scene 1</option>
+                <option value="Scene 2">Scene 2</option>
+                <option value="Scene 3">Scene 3</option>
+                <option value="Scene 4">Scene 4</option>
+            </options>
+        </state>
+    </channel-type>
+</thing:thing-descriptions>

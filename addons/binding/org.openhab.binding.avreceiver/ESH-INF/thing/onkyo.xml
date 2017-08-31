@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="avreceiver" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<thing-type id="onkyo">
+		<label>Onkyo Receiver</label>
+		<description>Binding for Onkyo AV Receivers</description>
+
+
+		<channels>
+			<channel id="power" typeId="power">
+				<label>Power</label>
+				<properties>
+					<property name="value">PWR{}</property>
+					<property name="ON">01</property>
+					<property name="OFF">00</property>
+				</properties>
+			</channel>
+			<channel id="mute" typeId="mute">
+				<label>Mute</label>
+				<properties>
+					<property name="value">AMT{}</property>
+					<property name="ON">01</property>
+					<property name="OFF">00</property>
+				</properties>
+			</channel>
+			<channel id="hdmi1out" typeId="hdmi1out">
+				<label>HDMI1 Out</label>
+				<properties>
+					<property name="value">HDO{}</property>
+					<property name="ON">00</property>
+					<property name="OFF">01</property>
+				</properties>
+			</channel>
+			<channel id="hdmi2out" typeId="hdmi2out">
+				<label>HDMI2 Out</label>
+				<properties>
+					<property name="value">HDO{}</property>
+					<property name="ON">00</property>
+					<property name="OFF">03</property>
+				</properties>
+			</channel>
+			<channel typeId="master_volume" id="master_volume">
+				<label>Master Volume</label>
+				<properties>
+					<property name="value">MVL{}</property>
+					<property name="min">0</property>
+					<property name="max">100</property>
+					<property name="step">0.5</property>
+					<property name="type">hex</property>
+				</properties>
+			</channel>
+			<channel typeId="sound_program_onkyo" id="sound_program_onkyo">
+				<label>Sound Program</label>
+				<properties>
+					<property name="value">{}</property>
+				</properties>
+
+			</channel>
+			<channel typeId="input_onkyo" id="input_onkyo">
+				<label>Input</label>
+				<properties>
+					<property name="value">SLI{}</property>
+				</properties>
+			</channel>
+		</channels>
+		<config-description>
+			<parameter name="hostname" type="text" required="true">
+				<label>Hostname or IP</label>
+				<description>Hostname or IP of Yamaha AV</description>
+			</parameter>
+			<parameter name="socket_port" type="integer" required="true">
+				<label>Port</label>
+				<description>The port </description>
+				<default>60128</default>
+			</parameter>
+            <parameter name="refresh_code" type="text" required="false">
+                <label>REFRESH CODE</label>
+                <default>QSTN</default>
+            </parameter>
+
+		</config-description>
+	</thing-type>
+
+	<!-- Sample Channel Type -->
+	<channel-type id="input_onkyo">
+		<item-type>String</item-type>
+		<label>Input</label>
+		<description>Input</description>
+		<state>
+			<options>
+				<option value="00">VIDEO1</option>
+				<option value="01">VIDEO2</option>
+				<option value="02">VIDEO3</option>
+				<option value="03">VIDEO4</option>
+				<option value="04">VIDEO5</option>
+				<option value="10">DVD</option>
+				<option value="20">TAPE1</option>
+				<option value="21">TAPE2</option>
+				<option value="22">PHONO</option>
+				<option value="23">CD</option>
+				<option value="24">FM</option>
+				<option value="25">AM</option>
+				<option value="26">TUNER</option>
+				<option value="27">MUSIC SERVER</option>
+				<option value="28">INTERNET RADIO</option>
+				<option value="29">USB FRONT</option>
+				<option value="2A">USB REAR</option>
+				<option value="40">Universal Port</option>
+				<option value="30">Multi Channel</option>
+				<option value="31">XM*1</option>
+				<option value="32">SIRIUS*1</option>
+			</options>
+		</state>
+	</channel-type>
+	<channel-type id="sound_program_onkyo">
+		<item-type>String</item-type>
+		<label>Sound Program</label>
+		<description>Sound Program</description>
+		<state>
+			<options>
+				<option value="00">STEREO</option>
+				<option value="01">DIRECT</option>
+				<option value="02">SURROUND</option>
+				<option value="03">FILM Game-RPG</option>
+				<option value="04">THX</option>
+				<option value="05">ACTION Game-Action</option>
+				<option value="06">MUSICAL Game-Rock</option>
+				<option value="07">MONO MOVIE</option>
+				<option value="08">ORCHESTRA</option>
+				<option value="09">UNPLUGGED</option>
+				<option value="0A">STUDIO-MIX</option>
+				<option value="0B">TV LOGIC</option>
+				<option value="0C">ALL CH STEREO</option>
+				<option value="0D">THEATER-DIMENSIONAL</option>
+				<option value="0E">ENHANCED 7/ENHANCE Game-Sports</option>
+				<option value="0F">MONO</option>
+				<option value="11">PURE AUDIO</option>
+				<option value="12">MULTIPLEX</option>
+				<option value="13">FULL MONO</option>
+				<option value="14">DOLBY VIRTUAL</option>
+				<option value="15">DTS Surround Sensation</option>
+				<option value="16">Audyssey DSX</option>
+				<option value="40">5.1ch Surround</option>
+				<option value="40">Straight Decode*1</option>
+				<option value="41">Dolby EX/DTS ES</option>
+				<option value="41">Dolby EX*2</option>
+				<option value="42">THX Cinema</option>
+				<option value="43">THX Surround EX</option>
+				<option value="44">THX Music</option>
+				<option value="45">THX Games</option>
+				<option value="50">U2/S2 Cinema/Cinema2</option>
+				<option value="51">MusicMode,U2/S2 Music</option>
+				<option value="52">Games Mode,U2/S2 Games</option>
+				<option value="80">PLII/PLIIx Movie</option>
+				<option value="81">PLII/PLIIx Music</option>
+				<option value="82">Neo:6 Cinema</option>
+				<option value="83">Neo:6 Music</option>
+				<option value="84">PLII/PLIIx THX Cinema</option>
+				<option value="85">Neo:6 THX Cinema</option>
+				<option value="86">PLII/PLIIx Game</option>
+				<option value="87">Neural Surr*3</option>
+				<option value="88">Neural THX/Neural Surround</option>
+				<option value="89">PLII/PLIIx THX Games</option>
+				<option value="8A">Neo:6 THX Games</option>
+				<option value="8B">PLII/PLIIx THX Music</option>
+				<option value="8C">Neo:6 THX Music</option>
+				<option value="8D">Neural THX Cinema</option>
+				<option value="8E">Neural THX Music</option>
+				<option value="8F">Neural THX Games</option>
+				<option value="90">PLIIz Height</option>
+				<option value="91">Neo:6 Cinema DTS Surround Sensation</option>
+				<option value="92">Neo:6 Music DTS Surround Sensation</option>
+				<option value="93">Neural Digital Music</option>
+				<option value="94">PLIIz Height + THX Cinema</option>
+				<option value="95">PLIIz Height + THX Music</option>
+				<option value="96">PLIIz Height + THX Games</option>
+				<option value="97">PLIIz Height + THX U2/S2 Cinema</option>
+				<option value="98">PLIIz Height + THX U2/S2 Music</option>
+				<option value="99">PLIIz Height + THX U2/S2 Games</option>
+				<option value="A0">PLIIx/PLII Movie + Audyssey DSX</option>
+				<option value="A1">PLIIx/PLII Music + Audyssey DSX</option>
+				<option value="A2">PLIIx/PLII Game + Audyssey DSX</option>
+				<option value="A3">Neo:6 Cinema + Audyssey DSX</option>
+				<option value="A4">Neo:6 Music + Audyssey DSX</option>
+				<option value="A5">Neural Surround + Audyssey DSX</option>
+				<option value="A6">Neural Digital Music + Audyssey DSX</option>
+				<option value="A7">Dolby EX + Audyssey DSX</option>
+			</options>
+		</state>
+	</channel-type>
+
+</thing:thing-descriptions>
