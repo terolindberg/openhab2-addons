@@ -95,4 +95,10 @@
       </options>
     </event>
     </channel-type>
+    <channel-type id="error">
+        <item-type>String</item-type>
+        <label>Error</label>
+        <description>Error from device</description>
+        <state readOnly="true" />
+    </channel-type>
 </thing:thing-descriptions>

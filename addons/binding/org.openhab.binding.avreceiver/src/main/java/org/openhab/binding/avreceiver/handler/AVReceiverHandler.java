@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
@@ -163,8 +164,11 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         if (channel != null && value != null) {
             logger.debug("Received message: '{}' could fit to channel '{}({})'", message, channel.getUID().getId(),
                     channel.getAcceptedItemType());
-
-            updateState(channel.getUID(), getState(message.substring(value.length()), channel));
+            if (channel.getChannelTypeUID().getId().equals("error")) {
+                handleError(channel, message.substring(value.length()));
+            } else {
+                updateState(channel.getUID(), getState(message.substring(value.length()), channel));
+            }
 
         } else {
             logger.warn(
@@ -175,6 +179,22 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
 
     protected String prepareCommand(ChannelUID channelUID, String commandStr) {
         return commandStr;
+    }
+
+    private void handleError(Channel channel, String message) {
+        Set<String> keys = channel.getProperties().keySet();
+
+        logger.debug("ERROR on channel {} - '{}'", channel.getLabel(), message);
+        for (String key : keys) {
+            if (key.startsWith("ERROR_CODE_")) {
+                if (key.substring("ERROR_CODE_".length()).trim().equals(message.trim())) {
+                    updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, channel.getProperties().get(key));
+                    return;
+                }
+            }
+        }
+        updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "Got error : '" + message + "'");
+
     }
 
     /**

@@ -139,7 +139,7 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+
         }
         try {
             if (br != null) {

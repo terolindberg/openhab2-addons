@@ -8,7 +8,9 @@
  */
 package org.openhab.binding.avreceiver.handler.comm.epson;
 
-import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.CHANNEL_VOLUME;
+import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.*;
+
+import java.util.HashMap;
 
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
@@ -24,6 +26,30 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class EpsonHandler extends AVReceiverHandler {
+
+    // ERROR CODES
+    static final HashMap<String, String> errorCodes = new HashMap();
+
+    static {
+        errorCodes.put("00", "There is no error or the error is recovered");
+        errorCodes.put("01", " Fan error");
+        errorCodes.put("03", " Lamp failure at power on");
+        errorCodes.put("04", " High internal temperature error");
+        errorCodes.put("06", " Lamp error");
+        errorCodes.put("07", " Open Lamp cover door error");
+        errorCodes.put("08", " Cinema filter error");
+        errorCodes.put("09", " Electric dual-layered capacitor is disconnected");
+        errorCodes.put("0A", " Auto iris error");
+        errorCodes.put("0B", " Subsystem Error");
+        errorCodes.put("0C", " Low air flow error");
+        errorCodes.put("0D", " Air filter air flow sensor error");
+        errorCodes.put("0E", " Power supply unit error (Ballast)");
+        errorCodes.put("0F", " Shutter error");
+        errorCodes.put("10", " Cooling system error (peltiert element)");
+        errorCodes.put("11", " Cooling system error (Pump)");
+
+    }
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public EpsonHandler(Thing thing, EpsonConnection connection) {
@@ -51,7 +77,13 @@ public class EpsonHandler extends AVReceiverHandler {
         if (commandStr.contains(" ?")) {
             commandStr = commandStr.replaceAll(" ", "");
         }
-        return new EpsonMessage(commandStr);
+        EpsonMessage message = new EpsonMessage(commandStr);
+        if (channelUID.getId().equals(CHANNEL_POWER)) {
+            // Epson states it takes up to 40s for projectors to come online
+            // https://files.support.epson.com/Epson_Handbook/assets/content/proddetails/download/pdf/ESCVP21_e_P.pdf
+            message.setPostSendDelayMs(40000);
+        }
+        return message;
     }
 
     @Override

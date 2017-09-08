@@ -10,7 +10,7 @@
         <description>Binding for Philips media gadgets</description>
 
         <channels>
-            <channel id="channel1" typeId="sample-channel"/>
+            <channel id="power" typeId="power"/>
         </channels>
         
         <config-description>
@@ -28,11 +28,6 @@
         </config-description>
     </thing-type>
 
-    <!-- Sample Channel Type -->
-    <channel-type id="sample-channel">
-        <item-type>avreceiverItem</item-type>
-        <label>AVReceiver Binding Channel</label>
-        <description>Sample channel for AVReceiver Binding</description>
-    </channel-type>
+
 
 </thing:thing-descriptions>

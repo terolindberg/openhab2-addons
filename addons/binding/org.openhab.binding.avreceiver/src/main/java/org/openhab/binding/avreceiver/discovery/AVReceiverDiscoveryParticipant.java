@@ -44,6 +44,7 @@ public class AVReceiverDiscoveryParticipant implements UpnpDiscoveryParticipant 
         supportedThingTypes.add(THING_TYPE_SAMSUNG);
         supportedThingTypes.add(THING_TYPE_ONKYO);
         supportedThingTypes.add(THING_TYPE_EPSON_PROJECTOR);
+        supportedThingTypes.add(THING_TYPE_PHILIPS);
 
     }
 

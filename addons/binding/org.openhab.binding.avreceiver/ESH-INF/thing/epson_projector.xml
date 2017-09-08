@@ -48,6 +48,29 @@
 					<property name="max">31</property>
 				</properties>
 			</channel>
+			<channel id="error" typeId="error">
+			    <label>Error</label>
+                <properties>
+                    <property name="value">ERR{}</property>
+
+                    <property name="ERROR_CODE_00">There is no error or the error is recovered</property>
+                    <property name="ERROR_CODE_01">Fan error</property>
+                    <property name="ERROR_CODE_03">Lamp failure at power on</property>
+                    <property name="ERROR_CODE_04">High internal temperature error</property>
+                    <property name="ERROR_CODE_06">Lamp error</property>
+                    <property name="ERROR_CODE_07">Open Lamp cover door error</property>
+                    <property name="ERROR_CODE_08">Cinema filter error</property>
+                    <property name="ERROR_CODE_09">Electric dual-layered capacitor is disconnected</property>
+                    <property name="ERROR_CODE_0A">Auto iris error</property>
+                    <property name="ERROR_CODE_0B">Subsystem Error</property>
+                    <property name="ERROR_CODE_0C">Low air flow error</property>
+                    <property name="ERROR_CODE_0D">Air filter air flow sensor error</property>
+                    <property name="ERROR_CODE_0E">Power supply unit error (Ballast)</property>
+                    <property name="ERROR_CODE_0F">Shutter error</property>
+                    <property name="ERROR_CODE_10">Cooling system error (peltiert element)</property>
+                    <property name="ERROR_CODE_11">Cooling system error (Pump)</property>
+                </properties>
+			</channel>
 		</channels>
 
 		<config-description>

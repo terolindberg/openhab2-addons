@@ -90,6 +90,7 @@ public class AVReceiverHandlerFactory extends BaseThingHandlerFactory {
             return new EpsonHandler(thing, new EpsonConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_ONKYO)) {
             return new OnkyoHandler(thing, new OnkyoConnection(host, port));
+
         } else {
             return new GenericHandler(thing, new GenericConnection(host, port));
         }
