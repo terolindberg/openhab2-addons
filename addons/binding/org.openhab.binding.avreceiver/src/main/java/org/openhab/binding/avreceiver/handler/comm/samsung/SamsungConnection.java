@@ -56,18 +56,4 @@ public class SamsungConnection extends AVSocketConnection {
 
     }
 
-    // public void send(String key) throws IOException {
-    // String base64key = Base64.getEncoder().encodeToString(key.getBytes());
-    //
-    // String msg = (char) 0x00 + "" + (char) 0x00 + "" + (char) 0x00 + "" + (char) base64key.length() + ""
-    // + (char) 0x00 + base64key;
-    // String pkt = (char) 0x00 + "" + (char) tv.length() + "" + (char) 0x00 + tv + (char) msg.length() + ""
-    // + (char) 0x00 + msg;
-    // System.out.println("Sending " + pkt);
-    // bw.write(pkt);
-    // bw.flush();
-    // System.out.println(key + " sent");
-    //
-    // }
-
 }

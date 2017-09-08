@@ -29,8 +29,6 @@ public class DenonMessage extends Message {
     public void writeFooter(Writer writer) throws IOException {
 
         writer.append((char) 0x0D);
-        // writer.write('\r');
-
     }
 
     @Override

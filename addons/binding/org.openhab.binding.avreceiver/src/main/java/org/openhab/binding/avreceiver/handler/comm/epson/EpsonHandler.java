@@ -16,6 +16,7 @@ import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
 import org.openhab.binding.avreceiver.handler.AVReceiverHandler;
+import org.openhab.binding.avreceiver.handler.comm.AVSocketConnection;
 import org.openhab.binding.avreceiver.handler.comm.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class EpsonHandler extends AVReceiverHandler {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public EpsonHandler(Thing thing, EpsonConnection connection) {
+    public EpsonHandler(Thing thing, AVSocketConnection connection) {
         super(thing, connection);
 
     }

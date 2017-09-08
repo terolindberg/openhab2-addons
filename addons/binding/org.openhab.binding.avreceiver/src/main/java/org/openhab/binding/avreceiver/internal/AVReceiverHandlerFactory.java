@@ -22,13 +22,10 @@ import org.openhab.binding.avreceiver.handler.comm.GenericConnection;
 import org.openhab.binding.avreceiver.handler.comm.GenericHandler;
 import org.openhab.binding.avreceiver.handler.comm.denon.DenonConnection;
 import org.openhab.binding.avreceiver.handler.comm.denon.DenonHandler;
-import org.openhab.binding.avreceiver.handler.comm.epson.EpsonConnection;
 import org.openhab.binding.avreceiver.handler.comm.epson.EpsonHandler;
-import org.openhab.binding.avreceiver.handler.comm.onkyo.OnkyoConnection;
 import org.openhab.binding.avreceiver.handler.comm.onkyo.OnkyoHandler;
 import org.openhab.binding.avreceiver.handler.comm.samsung.SamsungConnection;
 import org.openhab.binding.avreceiver.handler.comm.samsung.SamsungHandler;
-import org.openhab.binding.avreceiver.handler.comm.yamaha.YamahaConnection;
 import org.openhab.binding.avreceiver.handler.comm.yamaha.YamahaHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,11 +82,11 @@ public class AVReceiverHandlerFactory extends BaseThingHandlerFactory {
         } else if (thingTypeUID.equals(THING_TYPE_SAMSUNG)) {
             return new SamsungHandler(thing, new SamsungConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_YAMAHA)) {
-            return new YamahaHandler(thing, new YamahaConnection(host, port));
+            return new YamahaHandler(thing, new GenericConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_EPSON_PROJECTOR)) {
-            return new EpsonHandler(thing, new EpsonConnection(host, port));
+            return new EpsonHandler(thing, new GenericConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_ONKYO)) {
-            return new OnkyoHandler(thing, new OnkyoConnection(host, port));
+            return new OnkyoHandler(thing, new GenericConnection(host, port));
 
         } else {
             return new GenericHandler(thing, new GenericConnection(host, port));
