@@ -26,20 +26,20 @@
 					<property name="OFF">00</property>
 				</properties>
 			</channel>
-			<channel id="hdmi1out" typeId="hdmi1out">
-				<label>HDMI1 Out</label>
+			<channel id="zone1" typeId="zone1">
+				<label>Zone 1</label>
 				<properties>
-					<property name="value">HDO{}</property>
-					<property name="ON">00</property>
-					<property name="OFF">01</property>
+					<property name="value">SPA{}</property>
+					<property name="ON">01</property>
+					<property name="OFF">00</property>
 				</properties>
 			</channel>
-			<channel id="hdmi2out" typeId="hdmi2out">
-				<label>HDMI2 Out</label>
+			<channel id="zone2" typeId="zone2">
+				<label>Zone 2</label>
 				<properties>
-					<property name="value">HDO{}</property>
-					<property name="ON">00</property>
-					<property name="OFF">03</property>
+					<property name="value">SPB{}</property>
+					<property name="ON">01</property>
+					<property name="OFF">00</property>
 				</properties>
 			</channel>
 			<channel typeId="master_volume" id="master_volume">

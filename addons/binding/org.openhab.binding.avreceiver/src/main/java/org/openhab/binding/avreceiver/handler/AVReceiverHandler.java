@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2014-2016 by the respective copyright holders.
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -55,7 +56,8 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         return this.connection;
     }
 
-    public void handleRefresh(Command command, Channel channel) {
+    public final void handleRefresh(Command command, Channel channel) {
+        logger.debug("HANDLING REFRESH FOR {} - {}", getThing().getLabel(), channel.getLabel());
 
         Map<String, String> props = channel.getProperties();
         String code = (String) getThing().getConfiguration().get(CONFIG_REFRESH_CODE);
@@ -63,14 +65,25 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
             code = "?";
         }
         String value = props.get("value");
-        getConnection()
-                .sendMessage(createMessage(channel.getUID(), command, value.substring(0, value.indexOf("{}")) + code));
+        if (props.containsKey("value")) {
+            String message = props.get("value");
+
+            message = message.replaceAll("\\{\\}", code);
+            logger.debug("Refresh value:{}, code:{}, message:{}", props.get("value"), code, message);
+            getConnection().sendMessage(createMessage(channel.getUID(), command, message));
+        }
+        // getConnection()
+        // .sendMessage(createMessage(channel.getUID(), command, value.substring(0, value.indexOf("{}")) + code));
     }
 
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         Channel channel = getThing().getChannel(channelUID.getId());
 
+        if (channel == null) {
+            logger.error("No 'channel' '{}' found!", channelUID.getId());
+            return;
+        }
         Map<String, String> props = channel.getProperties();
 
         if (!props.containsKey("value")) {
@@ -78,7 +91,8 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
             return;
         }
 
-        logger.debug("Got command {} channel command: {}", command.toFullString(), channelUID.getId());
+        logger.debug("Got command '{}' channel command: '{}' thingstatus={} commandType={}", command.toFullString(),
+                channelUID.getId(), getThing().getStatus().toString(), command.getClass().getName());
         if (getThing().getStatus().equals(ThingStatus.ONLINE)) {
             String value = props.get("value");
 
@@ -86,6 +100,7 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
                 handleRefresh(command, channel);
 
             } else {
+
                 String message = handleChannelCommand(channelUID, command);
                 if (message == null) {
 
@@ -120,9 +135,16 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
      * Tries to match beginning of the message with a channel of the thing and change the
      * channel value accordingly. Can be overridden by the implementing class to handle
      * more complex protocols and cases which don't fit the xml specification easily
+     *
+     * For example: Some protocols have different structure in messages going to the device
+     * compared to ones sent by the device
      */
     @Override
     public void handleMessage(String message) {
+        if (message.length() == 0) {
+            return;
+        }
+
         List<Channel> channels = getThing().getChannels();
 
         // Trying to find possible channel
@@ -156,12 +178,12 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
     }
 
     /**
-     * To override
+     * To override if custom behavior is required
      *
      * @param channelUID
      * @param command
-     * @return null if no further action is required from base implementation, message body if overriding implementation
-     *         has something to send
+     * @return null if something non default is to be sent. If returns non-null, the command is sent directly to the
+     *         thing
      */
     protected abstract String handleChannelCommand(ChannelUID channelUID, Command command);
 
@@ -261,7 +283,19 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         Map<String, String> props = channel.getProperties();
         switch (channel.getAcceptedItemType()) {
             case DIMMER:
-                double val = Double.parseDouble(value);
+
+                double val;
+                try {
+                    val = Double.parseDouble(value);
+                } catch (NumberFormatException e) {
+                    try {
+                        logger.debug("trying hex:{} -> {}", value, Long.parseLong(value, 16));
+                        val = Long.parseLong(value, 16);
+                    } catch (Exception e2) {
+                        logger.warn("Value not dec nor hex for dimmer {}", value);
+                        return new DecimalType();
+                    }
+                }
                 while (val > 1) { // To fix possible Denon MV245 -> 24.5% -> 0.245
                     val = val / 100;
                 }

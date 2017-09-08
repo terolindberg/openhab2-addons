@@ -1,8 +1,15 @@
+/**
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.openhab.binding.avreceiver.handler.comm.onkyo;
 
 import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.CHANNEL_VOLUME;
 
-import org.eclipse.smarthome.core.thing.Channel;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
@@ -26,15 +33,7 @@ public class OnkyoHandler extends AVReceiverHandler {
 
     @Override
     protected String handleChannelCommand(ChannelUID channelUID, Command command) {
-        // TODO Auto-generated method stub
 
-        // connection.sendMessage(new DenonMessage("PWON"));
-        // TODO: handle command
-        // connection.sendMessage();
-        // Note: if communication with thing fails for some reason,
-        // indicate that by setting the status with detail information
-        // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR,
-        // "Could not control device at IP address x.x.x.x");
         return null;
     }
 
@@ -48,15 +47,12 @@ public class OnkyoHandler extends AVReceiverHandler {
     protected String prepareCommand(ChannelUID channelUID, String command) {
 
         if (channelUID.getId().equals(CHANNEL_VOLUME)) {
-            /**
-             * Commands are decimals with .5 step (80, 80.5, 81)
-             * Ex. MASTER VOLUME = +1.0dB : MV81<CR>
-             * +0.5dB : MV805<CR>
-             * 0dB : MV80<CR>
-             *
-             */
+            String type = getThing().getChannel(channelUID.getAsString()).getProperties().get("type");
+            logger.debug("Volume channel type: {}", type);
 
-            String prepared = command.replace(".", "");
+            Double commandDouble = Double.parseDouble(command);
+            String prepared = Integer.toHexString(commandDouble.intValue());
+
             while (prepared.length() < 2) {
                 prepared = "0" + prepared;
             }
@@ -66,17 +62,18 @@ public class OnkyoHandler extends AVReceiverHandler {
     }
 
     @Override
-    public void handleRefresh(Command command, Channel channel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void handleMessage(String message) {
-        if (message.contains(":")) {
-            message = message.replaceAll(":", "");
+        message = message.trim();
+
+        if (message.contains("ISCP")) {
+            message = message.replaceFirst("ISCP", "");
         }
-        logger.debug("MEssage:{}", message);
+        message = message.trim();
+        if (message.startsWith("!1")) {
+            message = message.substring(2);
+        }
+        logger.debug("onkyo MEssage:{}", message);
+
         super.handleMessage(message);
 
     }

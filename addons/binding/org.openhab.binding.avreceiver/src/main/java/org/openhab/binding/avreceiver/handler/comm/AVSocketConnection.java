@@ -1,7 +1,13 @@
+/**
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.openhab.binding.avreceiver.handler.comm;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -95,10 +101,22 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
         sender = new MessageSender(bw, this);
         senderThread = new Thread(sender);
         senderThread.start();
+
+        logger.debug("Initializing connection");
+        try {
+            initConnection(bw, br);
+        } catch (IOException e) {
+            logger.error("Failed to Initialize");
+            throw e;
+        }
         if (handler != null) {
             handler.updateStatus(ThingStatus.ONLINE);
         }
 
+    }
+
+    protected Socket getSocket() {
+        return socket;
     }
 
     public void disconnect() {
@@ -151,7 +169,7 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
      * @param br
      * @throws IOException
      */
-    protected void initConnection(BufferedWriter bw, BufferedReader br) throws IOException {
+    protected void initConnection(OutputStreamWriter bw, InputStreamReader br) throws IOException {
 
     }
 

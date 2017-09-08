@@ -22,6 +22,18 @@
         <description>Mute</description>
         <category></category>
     </channel-type>
+    <channel-type id="zone1">
+        <item-type>Switch</item-type>
+        <label>Speakers 1</label>
+        <description>Speakers 1</description>
+        <category></category>
+    </channel-type>
+    <channel-type id="zone2">
+        <item-type>Switch</item-type>
+        <label>Speakers 2</label>
+        <description>Speakers 2</description>
+        <category></category>
+    </channel-type>
     <channel-type id="hdmi1out">
         <item-type>Switch</item-type>
         <label>HDMI OUT 1</label>

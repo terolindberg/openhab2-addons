@@ -1,8 +1,15 @@
+/**
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.openhab.binding.avreceiver.handler.comm.epson;
 
 import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.CHANNEL_VOLUME;
 
-import org.eclipse.smarthome.core.thing.Channel;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
@@ -40,7 +47,10 @@ public class EpsonHandler extends AVReceiverHandler {
 
     @Override
     protected Message createMessage(ChannelUID channelUID, Command command, String commandStr) {
-        // TODO Auto-generated method stub
+
+        if (commandStr.contains(" ?")) {
+            commandStr = commandStr.replaceAll(" ", "");
+        }
         return new EpsonMessage(commandStr);
     }
 
@@ -65,18 +75,23 @@ public class EpsonHandler extends AVReceiverHandler {
         return super.prepareCommand(channelUID, command);
     }
 
-    @Override
-    public void handleRefresh(Command command, Channel channel) {
-        // TODO Auto-generated method stub
-
-    }
-
+    /**
+     * Cleaning message from projector to fit to XML specification
+     * Incoming message is structured like '::LUMINANCE=01'
+     * while outgoing message is 'LUMINANCE 01' and {@link AVReceiverHandler}
+     * handles automatically the messages that follow outgoing message structure
+     */
     @Override
     public void handleMessage(String message) {
+        String orig = message;
         if (message.contains(":")) {
             message = message.replaceAll(":", "");
         }
-        logger.debug("MEssage:{}", message);
+        if (message.contains("=")) {
+            message = message.replaceAll("=", " ");
+        }
+
+        logger.debug("Message converted:{}->{}", orig, message);
         super.handleMessage(message);
 
     }

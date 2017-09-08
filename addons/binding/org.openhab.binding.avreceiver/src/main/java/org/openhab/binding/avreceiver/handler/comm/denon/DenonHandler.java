@@ -1,8 +1,15 @@
+/**
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.openhab.binding.avreceiver.handler.comm.denon;
 
 import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.*;
 
-import org.eclipse.smarthome.core.thing.Channel;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
@@ -58,12 +65,6 @@ public class DenonHandler extends AVReceiverHandler {
             return prepared;
         }
         return super.prepareCommand(channelUID, command);
-    }
-
-    @Override
-    public void handleRefresh(Command command, Channel channel) {
-        // TODO Auto-generated method stub
-
     }
 
 }

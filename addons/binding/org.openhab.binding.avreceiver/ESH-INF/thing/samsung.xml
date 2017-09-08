@@ -4,7 +4,7 @@
         xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
         xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
-    <!-- Sample Thing Type -->
+    <!-- Copied mainly from SamsungTV binding-->
     <thing-type id="samsung">
         <label>Samsung TV / BluRay / Settop box</label>
         <description>Binding for Samsung media gadgets</description>
@@ -15,25 +15,29 @@
             <channel id="power" typeId="power"> 
                 <label>Power</label>
                 <properties>
-                    <property name="value">PW{}</property>
-                    <property name="ON">ON</property>
+                    <property name="value">KEY_{}</property>
+                    <property name="ON">POWER</property>
                     <property name="OFF">STANDBY</property>
-                </properties>            
+                </properties>
             </channel>   
-            <channel id="volume" typeId="volume" />
-            <channel id="mute" typeId="mute" />
-            <channel id="brightness" typeId="brightness" />
-            <channel id="contrast" typeId="contrast" />
-            <channel id="sharpness" typeId="sharpness" />
-            <channel id="colorTemperature" typeId="colortemperature" />
-            <channel id="sourceName" typeId="sourcename" />
-            <channel id="sourceId" typeId="sourceid" />
-            <channel id="channel" typeId="channel" />
-            <channel id="programTitle" typeId="programtitle" />
-            <channel id="channelName" typeId="channelname" />
-            <channel id="url" typeId="url" />
-            <channel id="stopBrowser" typeId="stopbrowser" />
-            <channel id="keyCode" typeId="keycode" />
+
+            <channel id="mute" typeId="mute">
+                <label>Mute</label>
+                <properties>
+                    <property name="value">KEY_{}</property>
+                    <property name="ON">MUTE</property>
+                    <property name="OFF">MUTE</property>
+                </properties>
+            </channel>
+
+            <channel id="keyCode" typeId="keycode">
+               <label>KeyCode</label>
+                <properties>
+                    <property name="value">KEY_{}</property>
+                </properties>           
+            </channel>
+            
+            <channel id="control" typeId="control"/>
         </channels>
         
         <config-description>
@@ -49,13 +53,268 @@
             </parameter>
 
         </config-description>
-    </thing-type>
+    </thing-type> 
 
-    <!-- Sample Channel Type -->
-    <channel-type id="sample-channel">
-        <item-type>avreceiverItem</item-type>
-        <label>AVReceiver Binding Channel</label>
-        <description>Sample channel for AVReceiver Binding</description>
+
+    <channel-type id="keycode">
+        <item-type>String</item-type>
+        <label>Key Code</label>
+        <description>The key code channel emulates the infrared remote controller and allows to send virtual button presses.</description>
+        <state>
+            <options>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="3SPEED">3SPEED</option>
+                <option value="4_3">4_3</option>
+                <option value="16_9">16_9</option>
+                <option value="AD">AD</option>
+                <option value="ADDDEL">ADDDEL</option>
+                <option value="ALT_MHP">ALT_MHP</option>
+                <option value="ANGLE">ANGLE</option>
+                <option value="ANTENA">ANTENA</option>
+                <option value="ANYNET">ANYNET</option>
+                <option value="ANYVIEW">ANYVIEW</option>
+                <option value="APP_LIST">APP_LIST</option>
+                <option value="ASPECT">ASPECT</option>
+                <option value="AUTO_ARC_ANTENNA_AIR">AUTO_ARC_ANTENNA_AIR</option>
+                <option value="AUTO_ARC_ANTENNA_CABLE">AUTO_ARC_ANTENNA_CABLE</option>
+                <option value="AUTO_ARC_ANTENNA_SATELLITE">AUTO_ARC_ANTENNA_SATELLITE</option>
+                <option value="AUTO_ARC_ANYNET_AUTO_START">AUTO_ARC_ANYNET_AUTO_START</option>
+                <option value="AUTO_ARC_ANYNET_MODE_OK">AUTO_ARC_ANYNET_MODE_OK</option>
+                <option value="AUTO_ARC_AUTOCOLOR_FAIL">AUTO_ARC_AUTOCOLOR_FAIL</option>
+                <option value="AUTO_ARC_AUTOCOLOR_SUCCESS">AUTO_ARC_AUTOCOLOR_SUCCESS</option>
+                <option value="AUTO_ARC_CAPTION_ENG">AUTO_ARC_CAPTION_ENG</option>
+                <option value="AUTO_ARC_CAPTION_KOR">AUTO_ARC_CAPTION_KOR</option>
+                <option value="AUTO_ARC_CAPTION_OFF">AUTO_ARC_CAPTION_OFF</option>
+                <option value="AUTO_ARC_CAPTION_ON">AUTO_ARC_CAPTION_ON</option>
+                <option value="AUTO_ARC_C_FORCE_AGING">AUTO_ARC_C_FORCE_AGING</option>
+                <option value="AUTO_ARC_JACK_IDENT">AUTO_ARC_JACK_IDENT</option>
+                <option value="AUTO_ARC_LNA_OFF">AUTO_ARC_LNA_OFF</option>
+                <option value="AUTO_ARC_LNA_ON">AUTO_ARC_LNA_ON</option>
+                <option value="AUTO_ARC_PIP_CH_CHANGE">AUTO_ARC_PIP_CH_CHANGE</option>
+                <option value="AUTO_ARC_PIP_DOUBLE">AUTO_ARC_PIP_DOUBLE</option>
+                <option value="AUTO_ARC_PIP_LARGE">AUTO_ARC_PIP_LARGE</option>
+                <option value="AUTO_ARC_PIP_LEFT_BOTTOM">AUTO_ARC_PIP_LEFT_BOTTOM</option>
+                <option value="AUTO_ARC_PIP_LEFT_TOP">AUTO_ARC_PIP_LEFT_TOP</option>
+                <option value="AUTO_ARC_PIP_RIGHT_BOTTOM">AUTO_ARC_PIP_RIGHT_BOTTOM</option>
+                <option value="AUTO_ARC_PIP_RIGHT_TOP">AUTO_ARC_PIP_RIGHT_TOP</option>
+                <option value="AUTO_ARC_PIP_SMALL">AUTO_ARC_PIP_SMALL</option>
+                <option value="AUTO_ARC_PIP_SOURCE_CHANGE">AUTO_ARC_PIP_SOURCE_CHANGE</option>
+                <option value="AUTO_ARC_PIP_WIDE">AUTO_ARC_PIP_WIDE</option>
+                <option value="AUTO_ARC_RESET">AUTO_ARC_RESET</option>
+                <option value="AUTO_ARC_USBJACK_INSPECT">AUTO_ARC_USBJACK_INSPECT</option>
+                <option value="AUTO_FORMAT">AUTO_FORMAT</option>
+                <option value="AUTO_PROGRAM">AUTO_PROGRAM</option>
+                <option value="AV1">AV1</option>
+                <option value="AV2">AV2</option>
+                <option value="AV3">AV3</option>
+                <option value="BACK_MHP">BACK_MHP</option>
+                <option value="BOOKMARK">BOOKMARK</option>
+                <option value="CALLER_ID">CALLER_ID</option>
+                <option value="CAPTION">CAPTION</option>
+                <option value="CATV_MODE">CATV_MODE</option>
+                <option value="CHDOWN">CHDOWN</option>
+                <option value="CHUP">CHUP</option>
+                <option value="CH_LIST">CH_LIST</option>
+                <option value="CLEAR">CLEAR</option>
+                <option value="CLOCK_DISPLAY">CLOCK_DISPLAY</option>
+                <option value="COMPONENT1">COMPONENT1</option>
+                <option value="COMPONENT2">COMPONENT2</option>
+                <option value="CONTENTS">CONTENTS</option>
+                <option value="CONVERGENCE">CONVERGENCE</option>
+                <option value="CONVERT_AUDIO_MAINSUB">CONVERT_AUDIO_MAINSUB</option>
+                <option value="CUSTOM">CUSTOM</option>
+                <option value="CYAN">CYAN</option>
+                <option value="BLUE">BLUE</option>
+                <option value="DEVICE_CONNECT">DEVICE_CONNECT</option>
+                <option value="DISC_MENU">DISC_MENU</option>
+                <option value="DMA">DMA</option>
+                <option value="DNET">DNET</option>
+                <option value="DNIE">DNIE</option>
+                <option value="DNSE">DNSE</option>
+                <option value="DOOR">DOOR</option>
+                <option value="DOWN">DOWN</option>
+                <option value="DSS_MODE">DSS_MODE</option>
+                <option value="DTV">DTV</option>
+                <option value="DTV_LINK">DTV_LINK</option>
+                <option value="DTV_SIGNAL">DTV_SIGNAL</option>
+                <option value="DVD_MODE">DVD_MODE</option>
+                <option value="DVI">DVI</option>
+                <option value="DVR">DVR</option>
+                <option value="DVR_MENU">DVR_MENU</option>
+                <option value="DYNAMIC">DYNAMIC</option>
+                <option value="ENTER">ENTER</option>
+                <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                <option value="ESAVING">ESAVING</option>
+                <option value="EXIT">EXIT</option>
+                <option value="EXT1">EXT1</option>
+                <option value="EXT2">EXT2</option>
+                <option value="EXT3">EXT3</option>
+                <option value="EXT4">EXT4</option>
+                <option value="EXT5">EXT5</option>
+                <option value="EXT6">EXT6</option>
+                <option value="EXT7">EXT7</option>
+                <option value="EXT8">EXT8</option>
+                <option value="EXT9">EXT9</option>
+                <option value="EXT10">EXT10</option>
+                <option value="EXT11">EXT11</option>
+                <option value="EXT12">EXT12</option>
+                <option value="EXT13">EXT13</option>
+                <option value="EXT14">EXT14</option>
+                <option value="EXT15">EXT15</option>
+                <option value="EXT16">EXT16</option>
+                <option value="EXT17">EXT17</option>
+                <option value="EXT18">EXT18</option>
+                <option value="EXT19">EXT19</option>
+                <option value="EXT20">EXT20</option>
+                <option value="EXT21">EXT21</option>
+                <option value="EXT22">EXT22</option>
+                <option value="EXT23">EXT23</option>
+                <option value="EXT24">EXT24</option>
+                <option value="EXT25">EXT25</option>
+                <option value="EXT26">EXT26</option>
+                <option value="EXT27">EXT27</option>
+                <option value="EXT28">EXT28</option>
+                <option value="EXT29">EXT29</option>
+                <option value="EXT30">EXT30</option>
+                <option value="EXT31">EXT31</option>
+                <option value="EXT32">EXT32</option>
+                <option value="EXT33">EXT33</option>
+                <option value="EXT34">EXT34</option>
+                <option value="EXT35">EXT35</option>
+                <option value="EXT36">EXT36</option>
+                <option value="EXT37">EXT37</option>
+                <option value="EXT38">EXT38</option>
+                <option value="EXT39">EXT39</option>
+                <option value="EXT40">EXT40</option>
+                <option value="EXT41">EXT41</option>
+                <option value="FACTORY">FACTORY</option>
+                <option value="FAVCH">FAVCH</option>
+                <option value="FF">FF</option>
+                <option value="FM_RADIO">FM_RADIO</option>
+                <option value="GAME">GAME</option>
+                <option value="GREEN">GREEN</option>
+                <option value="GUIDE">GUIDE</option>
+                <option value="HDMI">HDMI</option>
+                <option value="HDMI1">HDMI1</option>
+                <option value="HDMI2">HDMI2</option>
+                <option value="HDMI3">HDMI3</option>
+                <option value="HDMI4">HDMI4</option>
+                <option value="HELP">HELP</option>
+                <option value="HOME">HOME</option>
+                <option value="ID_INPUT">ID_INPUT</option>
+                <option value="ID_SETUP">ID_SETUP</option>
+                <option value="INFO">INFO</option>
+                <option value="INSTANT_REPLAY">INSTANT_REPLAY</option>
+                <option value="LEFT">LEFT</option>
+                <option value="LINK">LINK</option>
+                <option value="LIVE">LIVE</option>
+                <option value="MAGIC_BRIGHT">MAGIC_BRIGHT</option>
+                <option value="MAGIC_CHANNEL">MAGIC_CHANNEL</option>
+                <option value="MDC">MDC</option>
+                <option value="MENU">MENU</option>
+                <option value="MIC">MIC</option>
+                <option value="MORE">MORE</option>
+                <option value="MOVIE1">MOVIE1</option>
+                <option value="MS">MS</option>
+                <option value="MTS">MTS</option>
+                <option value="MUTE">MUTE</option>
+                <option value="NINE_SEPERATE">NINE_SEPERATE</option>
+                <option value="OPEN">OPEN</option>
+                <option value="PANNEL_CHDOWN">PANNEL_CHDOWN</option>
+                <option value="PANNEL_CHUP">PANNEL_CHUP</option>
+                <option value="PANNEL_ENTER">PANNEL_ENTER</option>
+                <option value="PANNEL_MENU">PANNEL_MENU</option>
+                <option value="PANNEL_POWER">PANNEL_POWER</option>
+                <option value="PANNEL_SOURCE">PANNEL_SOURCE</option>
+                <option value="PANNEL_VOLDOW">PANNEL_VOLDOW</option>
+                <option value="PANNEL_VOLUP">PANNEL_VOLUP</option>
+                <option value="PANORAMA">PANORAMA</option>
+                <option value="PAUSE">PAUSE</option>
+                <option value="PCMODE">PCMODE</option>
+                <option value="PERPECT_FOCUS">PERPECT_FOCUS</option>
+                <option value="PICTURE_SIZE">PICTURE_SIZE</option>
+                <option value="PIP_CHDOWN">PIP_CHDOWN</option>
+                <option value="PIP_CHUP">PIP_CHUP</option>
+                <option value="PIP_ONOFF">PIP_ONOFF</option>
+                <option value="PIP_SCAN">PIP_SCAN</option>
+                <option value="PIP_SIZE">PIP_SIZE</option>
+                <option value="PIP_SWAP">PIP_SWAP</option>
+                <option value="PLAY">PLAY</option>
+                <option value="PLUS100">PLUS100</option>
+                <option value="PMODE">PMODE</option>
+                <option value="POWER">POWER</option>
+                <option value="POWEROFF">POWEROFF</option>
+                <option value="POWERON">POWERON</option>
+                <option value="PRECH">PRECH</option>
+                <option value="PRINT">PRINT</option>
+                <option value="PROGRAM">PROGRAM</option>
+                <option value="QUICK_REPLAY">QUICK_REPLAY</option>
+                <option value="REC">REC</option>
+                <option value="RED">RED</option>
+                <option value="REPEAT">REPEAT</option>
+                <option value="RESERVED1">RESERVED1</option>
+                <option value="RETURN">RETURN</option>
+                <option value="REWIND">REWIND</option>
+                <option value="RIGHT">RIGHT</option>
+                <option value="RSS">RSS</option>
+                <option value="INTERNET">INTERNET</option>
+                <option value="RSURF">RSURF</option>
+                <option value="SCALE">SCALE</option>
+                <option value="SEFFECT">SEFFECT</option>
+                <option value="SETUP_CLOCK_TIMER">SETUP_CLOCK_TIMER</option>
+                <option value="SLEEP">SLEEP</option>
+                <option value="SOUND_MODE">SOUND_MODE</option>
+                <option value="SOURCE">SOURCE</option>
+                <option value="SRS">SRS</option>
+                <option value="STANDARD">STANDARD</option>
+                <option value="STB_MODE">STB_MODE</option>
+                <option value="STILL_PICTURE">STILL_PICTURE</option>
+                <option value="STOP">STOP</option>
+                <option value="SUB_TITLE">SUB_TITLE</option>
+                <option value="SVIDEO1">SVIDEO1</option>
+                <option value="SVIDEO2">SVIDEO2</option>
+                <option value="SVIDEO3">SVIDEO3</option>
+                <option value="TOOLS">TOOLS</option>
+                <option value="TOPMENU">TOPMENU</option>
+                <option value="TTX_MIX">TTX_MIX</option>
+                <option value="TTX_SUBFACE">TTX_SUBFACE</option>
+                <option value="TURBO">TURBO</option>
+                <option value="TV">TV</option>
+                <option value="TV_MODE">TV_MODE</option>
+                <option value="UP">UP</option>
+                <option value="VCHIP">VCHIP</option>
+                <option value="VCR_MODE">VCR_MODE</option>
+                <option value="VOLDOWN">VOLDOWN</option>
+                <option value="VOLUP">VOLUP</option>
+                <option value="WHEEL_LEFT">WHEEL_LEFT</option>
+                <option value="WHEEL_RIGHT">WHEEL_RIGHT</option>
+                <option value="W_LINK">W_LINK</option>
+                <option value="YELLOW">YELLOW</option>
+                <option value="ZOOM1">ZOOM1</option>
+                <option value="ZOOM2">ZOOM2</option>
+                <option value="ZOOM_IN">ZOOM_IN</option>
+                <option value="ZOOM_MOVE">ZOOM_MOVE</option>
+                <option value="ZOOM_OUT">ZOOM_OUT</option>
+            </options>
+        </state>
+    </channel-type>
+    <channel-type id="control">
+        <item-type>Player</item-type>
+        <label>Control</label>
+        <description>Control the Zone Player, e.g. start/stop/next/previous/ffward/rewind</description>
+        <category>Player</category>
+       
     </channel-type>
 
 </thing:thing-descriptions>

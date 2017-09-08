@@ -32,11 +32,11 @@
 				</properties>
 			</channel>
 		    <channel id="eco_mode" typeId="eco_mode">
-                <label>Eco Node</label>
+                <label>Eco Mode</label>
                 <properties>
                     <property name="value">LUMINANCE {}</property>
-                    <property name="ON">00</property>
-                    <property name="OFF">01</property>
+                    <property name="ON">01</property>
+                    <property name="OFF">00</property>
                 </properties>
             </channel>
 			<channel id="master_volume" typeId="master_volume">
@@ -53,7 +53,7 @@
 		<config-description>
 			<parameter name="hostname" type="text" required="true">
 				<label>Hostname or IP</label>
-				<description>Hostname or IP of Epson Projector AV</description>
+				<description>Hostname or IP of Epson Projector</description>
 			</parameter>
 
 			<parameter name="socket_port" type="integer" required="true">
@@ -61,7 +61,10 @@
 				<description>The port </description>
 			</parameter>
 
-
+            <parameter name="refresh_code" type="text" required="false">
+                <label>REFRESH CODE</label>
+                <default>?</default>
+            </parameter>
 
 		</config-description>
 	</thing-type>

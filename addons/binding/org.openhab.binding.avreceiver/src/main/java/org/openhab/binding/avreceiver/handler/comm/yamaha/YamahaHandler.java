@@ -1,8 +1,13 @@
+/**
+ * Copyright (c) 2010-2017 by the respective copyright holders.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.openhab.binding.avreceiver.handler.comm.yamaha;
 
-import java.util.Map;
-
-import org.eclipse.smarthome.core.thing.Channel;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
@@ -26,17 +31,17 @@ public class YamahaHandler extends AVReceiverHandler {
 
     }
 
-    @Override
-    public void handleRefresh(Command command, Channel channel) {
-        Map<String, String> props = channel.getProperties();
-
-        if (props.containsKey("value")) {
-            String message = props.get("value");
-
-            message = message.replaceAll("\\{\\}", "?");
-            getConnection().sendMessage(createMessage(channel.getUID(), command, message));
-        }
-    }
+    // @Override
+    // public void handleRefresh(Command command, Channel channel) {
+    // Map<String, String> props = channel.getProperties();
+    //
+    // if (props.containsKey("value")) {
+    // String message = props.get("value");
+    //
+    // message = message.replaceAll("\\{\\}", "?");
+    // getConnection().sendMessage(createMessage(channel.getUID(), command, message));
+    // }
+    // }
 
     @Override
     protected String handleChannelCommand(ChannelUID channelUID, Command command) {
