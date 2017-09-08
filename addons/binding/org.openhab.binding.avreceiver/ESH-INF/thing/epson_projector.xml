@@ -31,6 +31,22 @@
 					<property name="OFF">OFF</property>
 				</properties>
 			</channel>
+            <channel id="hreverse" typeId="hreverse">
+                <label>Rear Projection</label>
+                <properties>
+                    <property name="value">HREVERSE {}</property>
+                    <property name="ON">ON</property>
+                    <property name="OFF">OFF</property>
+                </properties>
+            </channel>
+            <channel id="vreverse" typeId="vreverse">
+                <label>Ceiling Projection</label>
+                <properties>
+                    <property name="value">VREVERSE {}</property>
+                    <property name="ON">ON</property>
+                    <property name="OFF">OFF</property>
+                </properties>
+            </channel>
 		    <channel id="eco_mode" typeId="eco_mode">
                 <label>Eco Mode</label>
                 <properties>
@@ -92,6 +108,16 @@
 		</config-description>
 	</thing-type>
 
+    <channel-type id="hreverse">
+        <item-type>Switch</item-type>
+        <label>Rear projection</label>
+        <description>Projector behind screen</description>
+    </channel-type>
+    <channel-type id="vreverse">
+        <item-type>Switch</item-type>
+        <label>Ceiling projection</label>
+        <description>Mounted to ceiling</description>
+    </channel-type>
 	<channel-type id="color_mode_epson">
 		<item-type>String</item-type>
 		<label>Color Mode</label>
