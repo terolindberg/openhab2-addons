@@ -8,14 +8,17 @@
  */
 package org.openhab.binding.avreceiver.handler;
 
-import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.CONFIG_REFRESH_CODE;
+import static org.openhab.binding.avreceiver.AVReceiverBindingConstants.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.library.types.StringType;
@@ -45,6 +48,12 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
     private Logger logger = LoggerFactory.getLogger(AVReceiverHandler.class);
 
     AVSocketConnection connection;
+
+    /**
+     * Defines how long non mapped error situation is visible
+     */
+    public static int ERROR_TIMEOUT_MS = 5000;
+    Timer errorTimer;
 
     public AVReceiverHandler(Thing thing, AVSocketConnection connection) {
         super(thing);
@@ -142,6 +151,7 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
      */
     @Override
     public void handleMessage(String message) {
+        logger.debug("Received message '{}'", message);
         if (message.length() == 0) {
             return;
         }
@@ -164,16 +174,21 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         if (channel != null && value != null) {
             logger.debug("Received message: '{}' could fit to channel '{}({})'", message, channel.getUID().getId(),
                     channel.getAcceptedItemType());
-            if (channel.getChannelTypeUID().getId().equals("error")) {
+            if (channel.getChannelTypeUID().getId().equalsIgnoreCase("error")) {
                 handleError(channel, message.substring(value.length()));
             } else {
-                updateState(channel.getUID(), getState(message.substring(value.length()), channel));
+                State state = getState(message.substring(value.length()), channel);
+                logger.debug("Updating channel {} state to {}", channel.getUID(), state);
+                updateState(channel.getUID(), state);
+                updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "");
+
             }
 
         } else {
-            logger.warn(
+            logger.info(
                     "Received message: '{}', can't find suitable channel, you may need to implement override handleMessage() in your own AVReceiverHandler implementation to take care of this properly",
                     message);
+            updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "no handling for '" + message + "'");
         }
     }
 
@@ -193,8 +208,22 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
                 }
             }
         }
-        updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "Got error : '" + message + "'");
+        if (message == null || message.length() == 0) {
+            message = "Unknown Error";
+        }
 
+        updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "'" + message + "'");
+        if (errorTimer != null) {
+            errorTimer.cancel();
+        }
+        errorTimer = new Timer();
+        errorTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, null);
+
+            }
+        }, ERROR_TIMEOUT_MS);
     }
 
     /**
@@ -208,9 +237,24 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
     protected abstract String handleChannelCommand(ChannelUID channelUID, Command command);
 
     @Override
+    public void handleConfigurationUpdate(Map<String, Object> configurationParameters) {
+        connection.disconnect();
+        if (configurationParameters.containsKey(CONFIG_HOST_SOCKET_PORT)) {
+            connection.setPort((int) configurationParameters.get(CONFIG_HOST_SOCKET_PORT));
+        }
+        if (configurationParameters.containsKey(CONFIG_HOST_NAME)) {
+            connection.setHost((String) configurationParameters.get(CONFIG_HOST_NAME));
+        }
+        logger.debug("New configuration : {}:{}", connection.getHost(), connection.getPort());
+
+        super.handleConfigurationUpdate(configurationParameters);
+        initialize();
+    }
+
+    @Override
     public void initialize() {
 
-        // Configuration conf = thing.getConfiguration();
+        Configuration conf = thing.getConfiguration();
         //
         // for (String key : conf.keySet()) {
         // logger.debug("Thing {} configuration {} : {}", thing.getLabel(), key, conf.get(key));
@@ -233,9 +277,15 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         // logger.debug("Properties for channel {} ( {} , {} )", channel.getLabel(), key, properties.get(key));
         // }
         // }
+
         try {
-            getConnection().startConnection(true);
-            updateStatus(ThingStatus.ONLINE);
+            if (this.connection.isConfigured()) {
+                this.connection.startConnection(true);
+                updateStatus(ThingStatus.ONLINE);
+            } else {
+                updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR, "Connection details not set");
+            }
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

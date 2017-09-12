@@ -47,8 +47,8 @@
 				<properties>
 					<property name="value">MVL{}</property>
 					<property name="min">0</property>
-					<property name="max">100</property>
-					<property name="step">0.5</property>
+					<property name="max">80</property>
+					<property name="step">1</property>
 					<property name="type">hex</property>
 				</properties>
 			</channel>

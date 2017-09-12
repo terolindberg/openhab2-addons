@@ -17,12 +17,6 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
  * @author Tero Lindberg - Initial contribution
  */
 public class AVReceiverBindingConstants {
-    public static enum Zone {
-        Main_Zone,
-        Zone_2,
-        Zone_3,
-        Zone_4;
-    }
 
     public static final String BINDING_ID = "avreceiver";
 
@@ -33,6 +27,7 @@ public class AVReceiverBindingConstants {
     public static final ThingTypeUID THING_TYPE_GENERAL_RENDERER = new ThingTypeUID(BINDING_ID, "generic");
     public static final ThingTypeUID THING_TYPE_YAMAHA = new ThingTypeUID(BINDING_ID, "yamaha");
     public static final ThingTypeUID THING_TYPE_DENON = new ThingTypeUID(BINDING_ID, "denon");
+    public static final ThingTypeUID THING_TYPE_MARANTZ = new ThingTypeUID(BINDING_ID, "marantz");
     public static final ThingTypeUID THING_TYPE_SAMSUNG = new ThingTypeUID(BINDING_ID, "samsung");
     public static final ThingTypeUID THING_TYPE_ONKYO = new ThingTypeUID(BINDING_ID, "onkyo");
     public static final ThingTypeUID THING_TYPE_EPSON_PROJECTOR = new ThingTypeUID(BINDING_ID, "epson_projector");
@@ -40,6 +35,7 @@ public class AVReceiverBindingConstants {
 
     // List of all Channel ids
     public static final String CHANNEL_POWER = "power";
+    public static final String CHANNEL_ERROR = "error";
     public static final String CHANNEL_INPUT = "input";
     public static final String CHANNEL_SURROUND = "surroundProgram";
     public static final String CHANNEL_VOLUME = "master_volume";
@@ -52,6 +48,7 @@ public class AVReceiverBindingConstants {
     public static final CharSequence UPNP_MANUFACTURER_YAMAHA = "YAMAHA";
     public static final CharSequence UPNP_MANUFACTURER_SAMSUNG = "SAMSUNG";
     public static final CharSequence UPNP_MANUFACTURER_DENON = "DENON";
+    public static final CharSequence UPNP_MANUFACTURER_MARANTZ = "MARANTZ";
     public static final CharSequence UPNP_MANUFACTURER_ONKYO = "ONKYO";
     public static final CharSequence UPNP_MANUFACTURER_EPSON = "EPSON";
     public static final CharSequence UPNP_MANUFACTURER_PHILIPS = "PHILIPS";

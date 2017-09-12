@@ -21,7 +21,6 @@ import org.eclipse.smarthome.config.discovery.UpnpDiscoveryParticipant;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.jupnp.model.meta.RemoteDevice;
-import org.openhab.binding.avreceiver.AVReceiverBindingConstants.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,7 +70,7 @@ public class AVReceiverDiscoveryParticipant implements UpnpDiscoveryParticipant 
         }
         properties.put(CONFIG_HOST_NAME, device.getIdentity().getDescriptorURL().getHost());
         // properties.put(CONFIG_HOST_PORT, device.getIdentity().getDescriptorURL().getPort());
-        properties.put(CONFIG_ZONE, Zone.Main_Zone.name());
+        // properties.put(CONFIG_ZONE, Zone.Main_Zone.name());
 
         DiscoveryResult result = DiscoveryResultBuilder.create(uid).withProperties(properties).withLabel(label).build();
 
@@ -108,6 +107,8 @@ public class AVReceiverDiscoveryParticipant implements UpnpDiscoveryParticipant 
                 return new ThingUID(THING_TYPE_YAMAHA, udn);
             } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_SAMSUNG)) {
                 return new ThingUID(THING_TYPE_SAMSUNG, udn);
+            } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_MARANTZ)) {
+                return new ThingUID(THING_TYPE_MARANTZ, udn);
             } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_DENON)) {
                 return new ThingUID(THING_TYPE_DENON, udn);
             } else if (manufacturer.toUpperCase().contains(UPNP_MANUFACTURER_ONKYO)) {

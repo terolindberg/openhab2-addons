@@ -53,6 +53,26 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
         timeoutTimer = new Timer();
     }
 
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public boolean isConfigured() {
+        return host != null && host.length() > 0 && port != 0;
+    }
+
     public void setThingHandler(AVReceiverHandler handler) {
         this.handler = handler;
     }
@@ -286,7 +306,7 @@ public abstract class AVSocketConnection implements ConnectionStateListener, Mes
         if (handler != null) {
             handler.handleMessage(message);
         } else {
-            System.out.println(message);
+            logger.debug("Received Message, but no handler {}", message);
         }
 
     }

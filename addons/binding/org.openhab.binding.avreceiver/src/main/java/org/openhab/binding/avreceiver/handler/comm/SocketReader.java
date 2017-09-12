@@ -71,7 +71,7 @@ public class SocketReader implements Runnable {
             if (m_run) {
             } else {
             }
-            e.printStackTrace();
+            logger.info("Reader stopped");
 
         }
 

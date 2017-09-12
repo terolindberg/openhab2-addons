@@ -48,11 +48,11 @@ public class OnkyoHandler extends AVReceiverHandler {
     protected String prepareCommand(ChannelUID channelUID, String command) {
 
         if (channelUID.getId().equals(CHANNEL_VOLUME)) {
-            String type = getThing().getChannel(channelUID.getAsString()).getProperties().get("type");
+            String type = getThing().getChannel(channelUID.getId()).getProperties().get("type");
             logger.debug("Volume channel type: {}", type);
 
             Double commandDouble = Double.parseDouble(command);
-            String prepared = Integer.toHexString(commandDouble.intValue());
+            String prepared = Integer.toHexString(commandDouble.intValue()).toUpperCase();
 
             while (prepared.length() < 2) {
                 prepared = "0" + prepared;
@@ -73,7 +73,12 @@ public class OnkyoHandler extends AVReceiverHandler {
         if (message.startsWith("!1")) {
             message = message.substring(2);
         }
-        logger.debug("onkyo MEssage:{}", message);
+        logger.debug("onkyo Message:{}", message);
+
+        if (message.startsWith("MVL")) {
+            int intValue = Integer.parseInt(message.substring(3), 16);
+            message = "MVL" + intValue;
+        }
 
         super.handleMessage(message);
 

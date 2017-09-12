@@ -22,6 +22,7 @@ public class YamahaMessage extends Message {
 
     public YamahaMessage(String msg) {
         super(msg);
+        this.setPostSendDelayMs(100);
     }
 
     @Override

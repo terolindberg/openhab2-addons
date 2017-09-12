@@ -7,7 +7,7 @@
     <!-- Sample Thing Type -->
     <thing-type id="yamaha">
         <label>Yamaha Receiver</label>
-        <description>Binding for Yamaha AV Receivers</description>
+        <description>Binding for Yamaha AV Receivers (YNCA protocol)</description>
 
         <channels>
             <channel id="power" typeId="power">

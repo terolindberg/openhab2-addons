@@ -77,7 +77,7 @@ public class AVReceiverHandlerFactory extends BaseThingHandlerFactory {
             return null;
         }
 
-        if (thingTypeUID.equals(THING_TYPE_DENON)) {
+        if (thingTypeUID.equals(THING_TYPE_DENON) || thingTypeUID.equals(THING_TYPE_MARANTZ)) {
             return new DenonHandler(thing, new DenonConnection(host, port));
         } else if (thingTypeUID.equals(THING_TYPE_SAMSUNG)) {
             return new SamsungHandler(thing, new SamsungConnection(host, port));
