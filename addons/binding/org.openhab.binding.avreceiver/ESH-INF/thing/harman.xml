@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="avreceiver"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+    <!-- Sample Thing Type -->
+    <thing-type id="harman">
+        <label>Harman kardon Receiver</label>
+        <description>Binding for Harman Kardon receiver</description>
+
+        <channels>
+            <channel id="power" typeId="power"> 
+                <label>Power</label>
+                <properties>
+                    <property name="value">PW{}</property>
+                    <property name="ON">ON</property>
+                    <property name="OFF">STANDBY</property>
+                </properties>            
+            </channel>   
+            <channel id="mute" typeId="mute">
+                <label>Mute</label>
+                <properties>
+                   <property name="value">MU{}</property>
+                   <property name="ON">ON</property>
+                   <property name="OFF">OFF</property>
+                </properties>
+            </channel>
+            <channel id="master_volume" typeId="master_volume"> 
+                <label>Master Volume</label>
+                <properties>
+                    <property name="value">MV{}</property>
+                </properties>      
+            </channel>   
+            <channel typeId="sound_program" id="sound_program">
+                <label>Sound Program</label>
+                <properties>
+                    <property name="value">MS{}</property>
+                </properties>
+            </channel>
+            <channel typeId="input_marantz" id="input_marantz">
+                <label>Input</label>
+                <properties>
+                    <property name="value">SI{}</property>
+                </properties>
+            </channel> 
+            <channel typeId="onscreen_marantz" id="onscreen_marantz">
+                <label>Onscreen</label>
+                <properties>
+                    <property name="value">NSE{}</property>
+                </properties>
+            </channel>       
+            <channel typeId="system.trigger" id="button_up">
+                <label>UP</label>
+                <properties>
+                    <property name="value">CURSOR UP</property>
+                </properties>
+            </channel>
+        </channels>
+        
+        <config-description>
+            <parameter name="hostname" type="text" required="true">
+                <label>Hostname or IP</label>
+                <description>Hostname or IP of marantz AV</description>
+             </parameter>
+            <parameter name="socket_port" type="integer" required="true">
+                <label>Port</label>
+                <description>The port </description>
+                <default>10025</default>
+            </parameter>
+            <parameter name="refresh_code" type="text" required="false">
+                <label>REFRESH CODE</label>
+                <default>?</default>
+            </parameter>
+
+
+        </config-description>
+    </thing-type>
+    <channel-type id="onscreen_marantz">
+        <item-type>StringList</item-type>
+        <label>On-Screen</label>
+        <description>OnScreen list</description>
+        <category></category>
+    </channel-type>
+    <channel-type id="input_marantz">
+        <item-type>String</item-type>
+        <label>Input</label>
+        <description>Input</description>
+        <category></category>
+        <state readOnly="false">
+            <options>
+                <option value="PHONO">Phono</option>
+                <option value="CD">CD</option>
+                <option value="TUNER">Tuner</option>
+                <option value="DVD">DVD</option>
+                <option value="BD">Bluray</option>
+                <option value="TV">TV</option>
+                <option value="SAT/CBL">SAT/Cable</option>
+                <option value="DVR">Digital Video Recorder</option>
+                <option value="GAME">Game</option>
+                <option value="GAME2">Game 2</option>
+                <option value="V.AUX">V.Aux</option>
+                <option value="DOCK">Dock</option>
+                <option value="HDRADIO">HD Radio</option>
+                <option value="IPOD">iPod</option>
+                <option value="NET/USB">Net/USB</option>
+                <option value="RHAPSODY">Rhapsody</option>
+                <option value="NAPSTER">Napster</option>
+                <option value="PANDORA">Pandora</option>
+                <option value="LASTFM">LastFM</option>
+                <option value="FLICKR">Flickr</option>
+                <option value="FAVORITES">Favourites</option>
+                <option value="IRADIO">Internet Radio</option>
+                <option value="SERVER">Server</option>
+                <option value="USB/IPOD">USB/iPod</option>
+                <option value="USB">USB start playback</option>
+                <option value="IPD">iPod start playback</option>
+                <option value="IRP">Internet Radio start playback</option>
+                <option value="FVP">Favourites start playback</option>
+            </options>
+        </state>
+    </channel-type>
+
+
+</thing:thing-descriptions>
