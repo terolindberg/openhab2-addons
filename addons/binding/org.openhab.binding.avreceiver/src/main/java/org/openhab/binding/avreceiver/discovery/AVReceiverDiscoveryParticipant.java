@@ -69,8 +69,6 @@ public class AVReceiverDiscoveryParticipant implements UpnpDiscoveryParticipant 
             // ignore and use the default label
         }
         properties.put(CONFIG_HOST_NAME, device.getIdentity().getDescriptorURL().getHost());
-        // properties.put(CONFIG_HOST_PORT, device.getIdentity().getDescriptorURL().getPort());
-        // properties.put(CONFIG_ZONE, Zone.Main_Zone.name());
 
         DiscoveryResult result = DiscoveryResultBuilder.create(uid).withProperties(properties).withLabel(label).build();
 

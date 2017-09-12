@@ -53,12 +53,9 @@ public class AVReceiverBindingConstants {
     public static final CharSequence UPNP_MANUFACTURER_EPSON = "EPSON";
     public static final CharSequence UPNP_MANUFACTURER_PHILIPS = "PHILIPS";
 
-    // public static final String CONFIG_REFRESH = "REFRESH_IN_SEC";
     public static final String CONFIG_HOST_NAME = "hostname";
     public static final String CONFIG_HOST_SOCKET_PORT = "socket_port";
     public static final String CONFIG_HOST_HTTP_PORT = "http_port";
-    public static final String CONFIG_REFRESH_CODE = "refresh_code";
-    public static final String CONFIG_ZONE = "ZONE";
-    public static final String CONFIG_RELVOLUMECHANGE = "RELVOLUMECHANGE";
+    public static final String CONFIG_REFRESH_CODE = "refresh_code";;
 
 }

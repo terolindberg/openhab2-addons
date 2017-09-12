@@ -28,21 +28,12 @@ public class EpsonMessage extends Message {
     @Override
     public void writeHeader(Writer writer) throws IOException {
 
-        // writer.append((char) 0x0D);
-
-        // writer.write('\r');
-        // writer.flush();
-        // writer.write('\n');
-
     }
 
     @Override
     public void writeFooter(Writer writer) throws IOException {
 
-        // writer.append((char) 0x0D);
-
         writer.write('\r');
-        // writer.write('\n');
 
     }
 

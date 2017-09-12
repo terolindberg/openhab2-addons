@@ -76,7 +76,6 @@ public class Message {
     }
 
     public int getRemainingRetries() {
-        // TODO Auto-generated method stub
         return count;
     }
 
