@@ -19,7 +19,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.eclipse.smarthome.config.core.Configuration;
-import org.eclipse.smarthome.core.library.CoreItemFactory;
 import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.library.types.StringType;
@@ -187,7 +186,7 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
 
         } else {
             logger.info(
-                    "Received message: '{}', can't find suitable channel, you may need to implement override handleMessage() in your own AVReceiverHandler implementation to take care of this properly",
+                    "Received message: '{}', can't find suitable channel, to use it, it needs to be added to thing.xml file or implement override handleMessage() in your own AVReceiverHandler implementation to take care of this properly",
                     message);
             updateStatus(ThingStatus.ONLINE, ThingStatusDetail.NONE, "no handling for '" + message + "'");
         }
@@ -337,10 +336,23 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
         }
     }
 
+    public static final String CALL = "Call";
+    public static final String COLOR = "Color";
+    public static final String CONTACT = "Contact";
+    public static final String DATETIME = "DateTime";
+    public static final String DIMMER = "Dimmer";
+    public static final String IMAGE = "Image";
+    public static final String LOCATION = "Location";
+    public static final String NUMBER = "Number";
+    public static final String PLAYER = "Player";
+    public static final String ROLLERSHUTTER = "Rollershutter";
+    public static final String STRING = "String";
+    public static final String SWITCH = "Switch";
+
     private State getState(String value, Channel channel) {
         Map<String, String> props = channel.getProperties();
         switch (channel.getAcceptedItemType()) {
-            case CoreItemFactory.DIMMER:
+            case DIMMER:
 
                 double val;
                 try {
@@ -358,11 +370,11 @@ public abstract class AVReceiverHandler extends BaseThingHandler implements Mess
                     val = val / 100;
                 }
                 return new DecimalType(new BigDecimal(val));
-            case CoreItemFactory.SWITCH:
+            case SWITCH:
                 return props.get("OFF").equals(value) ? OnOffType.OFF : OnOffType.ON;
-            case CoreItemFactory.NUMBER:
+            case NUMBER:
                 return new DecimalType(new BigDecimal(value));
-            case CoreItemFactory.STRING:
+            case STRING:
                 return new StringType(value);
         }
         return new StringType(value);

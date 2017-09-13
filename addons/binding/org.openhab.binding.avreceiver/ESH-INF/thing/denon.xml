@@ -66,7 +66,7 @@
                     <property name="value">SI{}</property>
                 </properties>
             </channel> 
-            <channel typeId="zone2_input_denon" id="input_denon">
+            <channel typeId="input_denon" id="zone2_input_denon">
                 <label>Zone2 Input</label>
                 <properties>
                     <property name="value">Z2{}</property>
@@ -78,12 +78,12 @@
                     <property name="value">NSE{}</property>
                 </properties>
             </channel>       
-            <channel typeId="system.trigger" id="button_up">
+            <!-- channel typeId="system.trigger" id="button_up">
                 <label>UP</label>
                 <properties>
                     <property name="value">CURSOR UP</property>
                 </properties>
-            </channel>
+            </channel-->
         </channels>
         
         <config-description>
