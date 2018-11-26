@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="avreceiver"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+    <!-- Sample Thing Type -->
+    <thing-type id="samsung">
+        <label>Samsung TV / BluRay / Settop box</label>
+        <description>Binding for Samsung media gadgets</description>
+
+        <channels>
+            <channel id="channel1" typeId="sample-channel"/>
+        </channels>
+        
+        <config-description>
+            <parameter name="hostname" type="text" required="true">
+                <label>Hostname or IP</label>
+                <description>Hostname or IP of Samsung Device</description>
+             </parameter>
+
+            <parameter name="socket_port" type="integer" required="true">
+                <label>Port</label>
+                <description>The port </description>
+                <default>55000</default>
+            </parameter>
+
+        </config-description>
+    </thing-type>
+
+    <!-- Sample Channel Type -->
+    <channel-type id="sample-channel">
+        <item-type>avreceiverItem</item-type>
+        <label>AVReceiver Binding Channel</label>
+        <description>Sample channel for AVReceiver Binding</description>
+    </channel-type>
+
+</thing:thing-descriptions>
